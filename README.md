@@ -14,3 +14,10 @@ the files, in binary format.
 
 If `src-dir/` contains a file name `jquery.min.js`, the that file will be
 availeble on the variable named `JQUERY_MIN_JS`.
+
+## Accessing strings on Arduino and ESP8266
+
+Due to the fact that Arduino/ESP8266 flash can only be fetched in chunks of 32
+bits. You need be carefull accessing that data. Refer to
+[http://arduino-esp8266.readthedocs.io/en/latest/PROGMEM.html]() to get the
+details.
