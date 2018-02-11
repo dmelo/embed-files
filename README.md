@@ -5,7 +5,7 @@ Prepare files to be written on Arduino flash.
 ## Usage:
 
 ```
-php embed-webfiles.php mbedos src-dir/ flashfiles.h
+php embed-files mbedos src-dir/ flashfiles.h
 ```
 
 Where `src-dir` is the directory containing all the files to be encoded. So far,

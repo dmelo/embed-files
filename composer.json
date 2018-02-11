@@ -1,0 +1,13 @@
+{
+    "name": "dmelo/embed-files",
+    "authors": [
+        {
+            "name": "Diogo Oliveira de Melo",
+            "email": "dmelo87@gmail.com"
+        }
+    ],
+    "bin": [
+        "embed-files"
+    ],
+    "require": {}
+}
