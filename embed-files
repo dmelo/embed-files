@@ -23,7 +23,7 @@ function strToIntArray($str)
     return implode(', ', $intArray);
 }
 
-if (4 != count($argv)) {
+if (4 != count($argv) && 5 != count($argv)) {
     printUsage();
     return 4;
 }
@@ -37,6 +37,10 @@ if (!in_array($platform, ["arduino", "mbedos"])) {
 
 $dirname = $argv[2];
 $outputFile = $argv[3];
+
+if (isset($argv[4])) {
+    $outputLengthFile = $argv[4];
+}
 
 if (!is_dir($dirname)) {
     echo "Not a directory: $dirname" . PHP_EOL;
@@ -56,8 +60,18 @@ if (false === ($fd = fopen($outputFile, "w"))) {
     return 3;
 }
 
-fwrite($fd, "#ifndef EMBED_WEBFILES_H" . PHP_EOL);
-fwrite($fd, "#define EMBED_WEBFILES_H" . PHP_EOL . PHP_EOL);
+if (isset($outputLengthFile) && false === ($fdLength = fopen($outputLengthFile, "w"))) {
+    echo "Could not open output length file $outputLengthFile" . PHP_EOL;
+    return 4;
+}
+
+fwrite($fd, "#ifndef EMBED_FILES_H" . PHP_EOL);
+fwrite($fd, "#define EMBED_FILES_H" . PHP_EOL . PHP_EOL);
+
+if (isset($fdLength)) {
+    fwrite($fdLength, "#ifndef EMBED_FILES_LENGTH_H" . PHP_EOL);
+    fwrite($fdLength, "#define EMBED_FILES_LENGTH_H" . PHP_EOL . PHP_EOL);
+}
 
 while ($entry = readdir($handle)) {
     $filename = $dirname . '/' . $entry;
@@ -74,9 +88,16 @@ while ($entry = readdir($handle)) {
         "static const char {$define}[]";
 
     fwrite($fd, "$variable = {" . $fileContent . "};" . PHP_EOL);
+    if (isset($fdLength)) {
+        fwrite($fdLength, "int {$define}_LENGTH = " . strlen($content) . ";" . PHP_EOL);
+    }
 }
 
 fwrite($fd, PHP_EOL . "#endif");
-
 fclose($fd);
+if (isset($fdLength)) {
+    fwrite($fdLength, PHP_EOL . "#endif");
+    fclose($fdLength);
+}
+
 closedir($handle);
