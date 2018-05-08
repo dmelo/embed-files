@@ -1,18 +1,28 @@
 # Embed-Files
 
-Prepare files to be written on Arduino flash.
+Prepare files to be written on Arduino and MBed OS devices flash.
+
+## Install:
+
+```
+composer require dmelo/embed-files
+````
 
 ## Usage:
 
 ```
-php embed-files mbedos src-dir/ flashfiles.h
+Usage: ./vendor/bin/embed-files PLATFORM SOURCE_DIR OUTPUT_H
+
+    PLATFORM - Possible values are "arduino" and "mbedos"
+    SOURCE_DIR - Directory that contains all files to be encoded
+    OUTPUT_H - Output C header file name where the encoded failes will be stored
 ```
 
-Where `src-dir` is the directory containing all the files to be encoded. So far,
-it is not recursive. And `flashfile.h` is the C header file that will contain
+Where `SOURCE_DIR` is the directory containing all the files to be encoded. So far,
+it is not recursive. And `OUTPUT_H` is the output C header file that will contain
 the files, in binary format.
 
-If `src-dir/` contains a file name `jquery.min.js`, the that file will be
+If `SOURCE_DIR` contains a file name `jquery.min.js`, then that file will be
 availeble on the variable named `JQUERY_MIN_JS`.
 
 ## Accessing strings on Arduino and ESP8266

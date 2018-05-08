@@ -3,7 +3,7 @@
 
 function printUsage()
 {
-    echo "Usage: php embed-webfiles PLATFORM SOURCE_DIR OUTPUT_H" . PHP_EOL . PHP_EOL;
+    echo "Usage: ./vendor/bin/embed-files PLATFORM SOURCE_DIR OUTPUT_H" . PHP_EOL . PHP_EOL;
     echo "    PLATFORM - Possible values are \"arduino\" and \"mbedos\"" . PHP_EOL;
     echo "    SOURCE_DIR - Directory that contains all files to be encoded" . PHP_EOL;
     echo "    OUTPUT_H - Output C header file name where the encoded failes will be stored" . PHP_EOL;
